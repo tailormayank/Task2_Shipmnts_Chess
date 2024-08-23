@@ -7,7 +7,6 @@ This is a fully functional chessboard game built using HTML, CSS, JavaScript, an
 ## Features
 
 - *Interactive Chessboard:* Click to select and move pieces, with valid moves highlighted.
-- *Themes and Colors:* Choose from multiple board themes and piece colors.
 - *Undo Functionality:* Undo the last move if you change your mind.
 - *Game Over Detection:* The game detects when the king is captured and ends the game.
 
