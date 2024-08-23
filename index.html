@@ -2,11 +2,37 @@
 <head>
   <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>    
 </head>
+
 <body ng-app="myApp">
 
+    <div id="board">
+        <div id="result" class="hide"></div>
+        <div id="pawn-promotion-option" class="hide">
+             <span id="queen" class="option"></span>
+             <span id="rook" class="option"></span>
+             <span id="knight" class="option"></span>
+             <span id="bishop" class="option"></span>
+        </div>
+        <div id="option-menu" class="hide">
+             <div id="back-btn" class="button">BACK</div>
+             <div id="theme-menu">
+                 THEME: <span id="theme-option" class="button"></span>
+             </div>
+             <div id="color-menu">
+                 COLOR: <span id="color-option" class="button"></span>
+             </div>
+             <div id="restart-btn" class="button">NEW GAME</div>
+        </div>
+        <div id="game" ng-app="myApp" ng-controller="GameController">
+             <div class="row" ng-repeat="y in widths">
+                  <div class="box" ng-repeat="x in widths" ng-attr-id="{{'box-' + x + '-' + y}}" piece="">
+                  </div>
+             </div>
+        </div>
+    </div>
+    
 <script src="index.js"></script>    
 </body>
 </html>
