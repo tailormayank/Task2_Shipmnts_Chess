@@ -122,55 +122,6 @@ $(document).ready(function() {
 
 
 		$(function() {
-			 //Option menu
-			 $('#option').on('click', function() {
-				  if($('#option-menu').hasClass('hide')) {
-						$('#game').css('opacity', '0.3');
-						$('#option-menu').removeClass('hide');
-				  } else {
-						$('#game').css('opacity', '1');
-						$('#option-menu').addClass('hide');
-				  }
-			 });
-
-			 //Back button
-			 //Return to game
-			 $('#back-btn').on('click', function() {
-				  $('#option-menu').addClass('hide');
-				  $('#game').css('opacity', '1');
-			 });
-			
-		 //Undo button 
-		 $('#undo-btn').on('click', function() {
-			  if(historyMoves.length === 0) {
-					return;
-			  }
-
-			  var move = historyMoves.pop();
-
-			  var previous = move.previous;        
-			  setPiece($('#' + previous.box), previous.piece.split('-')[0], previous.piece.split('-')[1]);
-
-			  var current = move.current;
-			  if(current.piece === '') {
-					var currentBox = $('#' + current.box);
-					currentBox.html('');
-					currentBox.attr('piece', '');
-					currentBox.removeClass('placed');
-			  } else {
-					setPiece($('#' + current.box), current.piece.split('-')[0], current.piece.split('-')[1]);
-			  }
-
-			  //Reset all changes
-			  $('.box').removeClass('selected');
-			  $('.box').removeClass('suggest');
-
-			  switchPlayer();
-
-			  select = { canMove: false, piece: '', box: '' };
-		 });
-
-		 //Pawn promotion event
 		 $('#pawn-promotion-option .option').on('click', function() {
 
 			  var newType = $(this).attr('id');
@@ -183,18 +134,13 @@ $(document).ready(function() {
 
 			  promotion = {};
 		 });
-
-		 //Reset game
 		 $('#restart-btn').on('click', function() {
 			  resetGame(); 
 		 });
-
-		 //Restart when game over
 		 $('#result').on('click', function() {
 			  resetGame();
 		 });
 
-		 //Box click event
 		 $('.box').on('click', function() {
 			  if($(this).hasClass('selected')) { //Undo to select new box
 					$(this).removeClass('selected');
@@ -542,34 +488,6 @@ $(document).ready(function() {
 			  $('#player').html(chessPieces.black.king);
 			  player = 'black';
 		 }
-	}
-
-	//Restart game
-	var resetGame = function() {
-		 deleteBox($('.box'));
-		 $('#player').html(chessPieces.black.king);
-		 $('#result').addClass('hide');
-		 $('#option-menu').addClass('hide');
-		 $('#game').css('opacity', '1');
-
-		 //Set up color for boxes, chess pieces
-		 for(var i = 0; i < 8; i++) {
-			  for(var j = 0; j < 8; j++) {
-					var box = $('#box-' + i + '-' + j);
-					setNewBoard(box, i, j);
-			  }
-		 }
-
-		 //Set global variables to default
-		 player = 'black';
-		 select = {
-			  canMove: false,
-			  piece: '',
-			  box: ''
-		 };
-
-		 historyMoves = [];
-		 promotion = {};
 	}
 
 	//Announce the winner
