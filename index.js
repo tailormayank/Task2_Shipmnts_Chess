@@ -299,4 +299,85 @@ $(document).ready(function () {
       archerMoveType = archerMoveType === "bishop" ? "rook" : "bishop";
     }
   };
+
+  //Returns possible moves of the selected piece
+  var getNextMoves = function(selectedPiece, selectedBox) {
+    var selectedPieceInfo = selectedPiece.split('-');
+    var color = selectedPieceInfo[0];
+    var type = selectedPieceInfo[1];
+
+    var id = selectedBox.split('-');
+    var i = parseInt(id[1]);
+    var j = parseInt(id[2]);
+
+    var nextMoves = [];
+
+    switch(type) {
+       case 'archer':
+           var moves;
+           if (archerMoveType === 'bishop') {
+               moves = [
+                   [0, 1], [0, -1], [1, 0], [-1, 0]
+               ];
+           } else { 
+               moves = [
+                   [1, 1], [1, -1], [-1, 1], [-1, -1]
+                   
+               ];
+           }
+           nextMoves = getQueenMoves(i, j, color, moves);
+        break;
+         case 'pawn':
+               if(color === 'black') {
+                    var moves = [
+                         [0, 1], [0, 2], [1, 1], [-1, 1]
+                    ];
+               } else {
+                    var moves = [
+                         [0, -1], [0, -2], [1, -1], [-1, -1]
+                    ];
+               }
+               nextMoves = getPawnMoves(i, j, color, moves);
+               break;
+         case 'rook':
+               var moves = [
+                    [0, 1], [0, -1], [1, 0], [-1, 0]
+               ];
+               nextMoves = getQueenMoves(i, j, color, moves);
+               break;
+         case 'knight':
+               var moves = [
+                    [-1, -2], [-2, -1], [1, -2], [-2, 1],
+                    [2, -1], [-1, 2], [2, 1], [1, 2]
+               ];
+               nextMoves = getKnightMoves(i, j, color, moves);
+               break;
+         case 'bishop':
+               var moves = [
+                    [1, 1], [1, -1], [-1, 1], [-1, -1]
+               ];
+               nextMoves = getQueenMoves(i, j, color, moves);
+               break;
+         case 'queen':
+               var moves1 = [
+                    [1, 1], [1, -1], [-1, 1], [-1, -1]
+               ];
+               var moves2 = [
+                    [0, 1], [0, -1], [1, 0], [-1, 0]
+               ];
+               nextMoves = getQueenMoves(i, j, color, moves1)
+                               .concat(getQueenMoves(i, j, color, moves2));
+               break;
+         case 'king':
+               var moves = [
+                    [1, 1], [1, -1], [-1, 1], [-1, -1],
+                    [0, 1], [0, -1], [1, 0], [-1, 0]
+               ];
+               nextMoves = getKnightMoves(i, j, color, moves);
+               break;
+         default: 
+               break;
+    }
+    return nextMoves;
+}
 });
