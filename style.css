@@ -1,0 +1,20 @@
+body {
+    width: 580px;
+    margin: 10px auto;
+ }
+ 
+ /*=====BOARD GAME=================*/
+ 
+ #board {
+     width: 480px;
+     margin: 15px auto 20px auto;
+     background: #ccc;
+     border: 25px solid #fff;
+     border-radius: 10px;
+     box-shadow: inset -1px 1px 7px rgba(0,0,0,.2), 
+                 inset 1px -1px 7px rgba(0,0,0,.2), 
+                 1px 12px 5px rgba(0,0,0,.4), 
+                 4px 3px 8px rgba(0,0,0,.4), 
+                 5px 10px 10px rgba(0,0,0,.2), 
+                 -5px 10px 10px rgba(0,0,0,.4);
+ }

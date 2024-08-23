@@ -21,6 +21,15 @@
 
    var player = 'white'; //First player
 
+   var select = {
+    canMove: false, //Ready to move of not
+    piece: '',      //Color, type of the piece
+    box: ''         //Position of the piece
+}
+
+//Game's history (pieces + positions)
+var historyMoves = [];
+
 angular.module('myApp', []).controller('GameController', ['$scope', function($scope) {
 	
 	//Draw the board game
@@ -86,3 +95,25 @@ var setColor = function() {
     
     $('#player').css('color', color['color']);
 }
+
+var promotion = {};
+
+//Set up board game
+$(function() {		 
+    $('#player').html(chessPieces.black.king);
+
+     //Set up color for boxes, chess pieces
+     for(var i = 0; i < 8; i++) {
+          for(var j = 0; j < 8; j++) {
+                var box = $('#box-' + i + '-' + j);
+                if((i + j) % 2 !== 0) {
+                     box.addClass('light-box');
+                } else {
+                     box.addClass('dark-box');
+                }
+                setNewBoard(box, i, j); //Set up all chess pieces
+          }
+     }
+     setColor();
+     setTheme();
+});
